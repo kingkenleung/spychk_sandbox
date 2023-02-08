@@ -6,7 +6,7 @@ const https = require("https")
 const server = http.createServer(app);
 const path = require('path');
 const indexRouter = require('./routes/index');
-const PORT = process.env.PORT || '443';
+const PORT = 3000;
 
 
 app.use(express.json());
