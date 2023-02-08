@@ -1,9 +1,13 @@
 const createError = require('http-errors');
 const express = require('express');
+const app = express();
+const http = require('http')
+const https = require("https")
+const server = http.createServer(app);
 const path = require('path');
 const indexRouter = require('./routes/index');
+const PORT = 3000;
 
-const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,4 +32,13 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+const hktime = () => {
+  const t = new Date(Date.now());
+  const hkt = t.toLocaleString('en-HK', { timeZone: 'Asia/Hong_Kong' })
+  return hkt;
+}
+
+server.listen(PORT, () => {
+  console.log(`Time of now: ${hktime()}`)
+  console.log(`Server is running at PORT ${PORT}`);
+});
